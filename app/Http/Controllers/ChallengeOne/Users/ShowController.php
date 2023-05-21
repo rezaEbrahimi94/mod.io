@@ -21,8 +21,6 @@ final class ShowController extends Controller
      */
     public function show(Request $request, User $user): UserResource
     {
-        // TODO: challenge 1.0
+        return new UserResource($user);
     }
-
-
 }

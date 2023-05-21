@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChallengeOne\Users as Users;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,11 @@ use App\Http\Controllers\ChallengeOne\Users as Users;
 |
 */
 
-// TODO: add routes for challenge 1.0
+Route::prefix('users')->group(function () {
+    Route::get('/', [Users\IndexController::class, 'index']);
+    Route::get('/{user}', [Users\ShowController::class, 'show']);
+    Route::post('/', [Users\CreateController::class, 'create']);
+});
 
 // TODO: add routes for challenge 2.0
 

@@ -19,8 +19,8 @@ final class IndexController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        // TODO: challenge 1.0
+        $users = User::all();
+
+        return UserResource::collection($users);    
     }
-
-
 }
