@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace App\Http\Controllers\ChallengeTwo\Mods;
+use App\Http\Requests\CreateModRequest;
+use App\Http\Resources\ModResource;
+use App\Models\Mod;
 
 final class CreateController
 {
@@ -13,9 +16,19 @@ final class CreateController
      * @param Request $request
      * @return ModResource
      */
-    public function create(Request $request): ModResource
+    public function create(CreateModRequest $request): ModResource
     {
-        // TODO: challenge 2.0
+        // Get the authenticated user's ID
+        $userId = auth()->id();
+
+        // Validation passed, create the mod
+        $mod = Mod::create([
+            'user_id' => $userId,
+            'name' => $request->input('name'),
+            'path' => $request->input('path'),
+        ]);
+
+        return new ModResource($mod);
     }
 
 

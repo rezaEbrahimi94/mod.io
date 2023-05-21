@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChallengeOne\Users as Users;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChallengeTwo\Mods as Mods;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,9 @@ Route::prefix('users')->group(function () {
     Route::post('/', [Users\CreateController::class, 'create']);
 });
 
-// TODO: add routes for challenge 2.0
-
+// Routes for Challenge 2.0
+Route::prefix('mods')->group(function () {
+    Route::get('/', [Mods\IndexController::class, 'index']);
+    Route::post('/', [Mods\CreateController::class, 'create']);
+});
 // TODO: add routes for challenge 3.0

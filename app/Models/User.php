@@ -109,4 +109,9 @@ class User extends Authenticatable
     {
         $this->setAttribute('password', $password);
     }
+
+    public function mods()
+    {
+        return $this->hasMany(Mod::class);
+    }
 }
