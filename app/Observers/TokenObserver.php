@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Token;
-
+use App\Models\Log;
 class TokenObserver
 {
     /**
@@ -14,18 +14,36 @@ class TokenObserver
      */
     public function created(Token $token)
     {
-        // TODO: challenge 3.0 create a log when a token is created
+        $this->createLog($token, 'created');
     }
 
     /**
-     * Handle the Token "deleted" event.
+     * Handle the Token "updating" event.
      *
      * @param  \App\Models\Token  $token
      * @return void
      */
-    public function deleted(Token $token)
+    public function updating(Token $token)
     {
-        // TODO: challenge 3.0 create a log when a token is deleted
+        if ($token->isDirty('revoked') && $token->revoked) {
+            $this->createLog($token, 'deleted');
+        }
+    }
+
+
+    /**
+     * Create a log for the given token.
+     *
+     * @param  \App\Models\Token  $token
+     * @param  string  $action
+     * @return void
+     */
+    private function createLog(Token $token, string $action)
+    {
+        Log::create([
+            'key' => $token->getKey(),
+            'action' => $action,
+        ]);
     }
 
 }

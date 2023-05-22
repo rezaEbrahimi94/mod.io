@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -113,5 +114,13 @@ class User extends Authenticatable
     public function mods()
     {
         return $this->hasMany(Mod::class);
+    }
+
+    /**
+     * Get the tokens associated with the user.
+     */
+    public function tokens(): HasMany
+    {
+        return $this->hasMany(Token::class);
     }
 }

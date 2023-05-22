@@ -8,12 +8,13 @@ use App\Http\Controllers\ChallengeThree\Tokens\Interfaces\TokenRepositoryInterfa
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TokenDeleteRequest;
 use Illuminate\Http\Response;
+use App\Models\Log;
 
 final class DeleteController extends Controller
 {
 
     /**
-     * delete a given token, return a resp
+     * Delete a given token and return a response.
      *
      * @param TokenRepositoryInterface $repository
      * @param TokenDeleteRequest $request
@@ -21,8 +22,10 @@ final class DeleteController extends Controller
      */
     public function delete(TokenRepositoryInterface $repository, TokenDeleteRequest $request): Response
     {
-        // TODO: challenge 3.0
+        $token = $request->input('token');
+        $deleted = $repository->revokeToken($token);
+        return response('', 204);
+    
     }
-
 
 }

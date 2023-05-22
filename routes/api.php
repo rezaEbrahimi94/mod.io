@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ChallengeOne\Users as Users;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChallengeTwo\Mods as Mods;
+use App\Http\Controllers\ChallengeThree\Tokens as Tokens;
+use App\Http\Controllers\ChallengeOne\Users as Users;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +16,21 @@ use App\Http\Controllers\ChallengeTwo\Mods as Mods;
 |
 */
 
+// Routes for Challenge 1
 Route::prefix('users')->group(function () {
     Route::get('/', [Users\IndexController::class, 'index']);
     Route::get('/{user}', [Users\ShowController::class, 'show']);
     Route::post('/', [Users\CreateController::class, 'create']);
 });
 
-// Routes for Challenge 2.0
+// Routes for Challenge 2
 Route::prefix('mods')->group(function () {
     Route::get('/', [Mods\IndexController::class, 'index']);
     Route::post('/', [Mods\CreateController::class, 'create']);
 });
-// TODO: add routes for challenge 3.0
+
+// Routes for Challenge 3
+Route::prefix('tokens')->group(function () {
+    Route::get('/', [Tokens\CreateController::class, 'create']);
+    Route::middleware('api.token')->delete('/', [Tokens\DeleteController::class, 'delete']);
+});

@@ -17,8 +17,8 @@ class TokenServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // TODO: challenge 3.0
-    }
+        $this->app->bind(TokenRepositoryInterface::class, TokenRepository::class);
+        $this->app->bind(TokenServiceInterface::class, TokenService::class);    }
 
     /**
      * Bootstrap any application services.

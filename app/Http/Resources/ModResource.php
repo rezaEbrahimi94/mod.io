@@ -19,12 +19,7 @@ class ModResource extends JsonResource
 
         return [
             'id' => $this->resource->id,
-            'user_id' => [
-                'id' => $this->resource->user_id,
-                'name' => $this->resource->user->name,
-                'email' => $this->resource->user->email,
-                'created_at' => Carbon::parse($this->resource->user->created_at)->toDateTimeString(),
-            ],
+            'user_id' => new UserResource($this->resource->user), // Use UserResource for user_id
             'name' => $this->resource->name,
             'path' => $this->resource->path,
             'created_at' => Carbon::parse($this->resource->created_at)->toDateTimeString(),

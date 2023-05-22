@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Resources;
-
 use Carbon\Carbon;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class TokenResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,10 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => (int)$this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),        ];
+            'id' => $this->resource->getId(),
+            'key' => $this->resource->getKey(),
+            'revoked' => $this->resource->getRevoked(),
+            'created_at' => Carbon::parse($this->resource->getCreatedAt())->toDateTimeString(),
+        ];
     }
 }
